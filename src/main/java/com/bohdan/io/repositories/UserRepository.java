@@ -1,4 +1,4 @@
-package com.bohdan;
+package com.bohdan.io.repositories;
 
 import com.bohdan.io.entity.UserEntity;
 import org.springframework.data.repository.CrudRepository;

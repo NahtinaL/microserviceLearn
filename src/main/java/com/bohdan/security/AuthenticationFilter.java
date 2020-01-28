@@ -1,6 +1,9 @@
 package com.bohdan.security;
 
 
+import com.bohdan.SpringApplicationContext;
+import com.bohdan.service.UserService;
+import com.bohdan.shared.dto.UserDto;
 import com.bohdan.ui.model.request.UserLoginRequestModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
@@ -56,8 +59,10 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
                         .setExpiration(new Date(System.currentTimeMillis() + SecurityConstants.EXPARATION_TIME))
                         .signWith(SignatureAlgorithm.HS512, SecurityConstants.TOKEN_SECRET)
                         .compact();
+        UserService userService = (UserService)SpringApplicationContext.getBean("userServiceImpl");
+        UserDto userDto = userService.getUser(username);
 
         response.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX + token);
-
+        response.addHeader("UserID", userDto.getUserId());
     }
 }

@@ -1,5 +1,6 @@
 package com.bohdan;
 
+import com.bohdan.security.AppProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,5 +23,10 @@ public class MobileWebWsApplication {
     @Bean
     public SpringApplicationContext springApplicationContext() {
         return new SpringApplicationContext();
+    }
+
+    @Bean(name = "AppProperties")
+    public AppProperties getAppProperties() {
+        return new AppProperties();
     }
 }
